@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import {categoryState } from "../atoms";
-
-
+import { categoryState, selectedCategoryState } from "../atoms";
 
 function AddCat() {
-  const [newCat, setNewCat] = useState("")
+  const [newCat, setNewCat] = useState("");
+  const [categories, setCategories] = useRecoilState(categoryState);
+
+  const handleAddCategory = () => {
+    if (newCat && !categories.includes(newCat)) {
+      setCategories([...categories, newCat]);
+      setNewCat("");
+    }
+  };
   return (
     <div style={{ marginTop: "10px" }}>
       <input
@@ -14,7 +20,7 @@ function AddCat() {
         onChange={(event) => setNewCat(event.target.value)}
         placeholder="새 카테고리"
       />
-      <button>카테고리 추가</button>
+      <button onClick={handleAddCategory}>카테고리 추가</button>  
     </div>
   );
 }
