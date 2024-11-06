@@ -6,7 +6,7 @@ function AddCat() {
   const [newCat, setNewCat] = useState("");
   const [categories, setCategories] = useRecoilState(categoryState);
 
-  const handleAddCategory = () => {
+  const addCat = () => {
     if (newCat && !categories.includes(newCat)) {
       setCategories([...categories, newCat]);
       setNewCat("");
@@ -20,7 +20,7 @@ function AddCat() {
         onChange={(event) => setNewCat(event.target.value)}
         placeholder="새 카테고리"
       />
-      <button onClick={handleAddCategory}>카테고리 추가</button>  
+      <button onClick={addCat}>카테고리 추가</button>  
     </div>
   );
 }
